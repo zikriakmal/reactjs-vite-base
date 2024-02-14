@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import XLogo from '../../assets/xlogo.svg';
 
 const LoginPage = () => {
@@ -22,7 +23,9 @@ const LoginPage = () => {
                         <p className='text-xs mb-[20px]'>By signing up, you agree to the Terms of Service and Privacy Policy, including Cookie Use.</p>
                         <div className='mt-[40px] flex flex-col'>
                             <p>Already have an account?</p>
-                            <Button title={'Sign Up With Apple'} />
+                            <Link to={'/'} className='flex flex-1'>
+                                <Button title={'Sign In'} textColor={'primary'} />
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -35,15 +38,13 @@ const LoginPage = () => {
 
 const Button = (props: any) => {
     return (
-        <button className={'flex-1 border p-2 py-3 rounded-full hover:border-gray-500 hover:bg-slate-200 my-2'} style={props?.type === 'primary' ? { backgroundColor: 'rgb(29, 155, 240)', color: 'white' } : {}}>
-            <div className='text-center px-20 font-bold'>
+        <button type='button' className={'flex-1 border p-2 py-3 rounded-full hover:border-gray-500 hover:bg-slate-200 my-2'} style={props?.type === 'primary' ? { backgroundColor: 'rgb(29, 155, 240)', color: 'white' } : {}}>
+            <div className='text-center px-20 font-bold' style={props?.textColor === 'primary' ? { color: 'rgb(29, 155, 240)' } : {}}>
                 <p>{props?.title}</p>
             </div>
         </button>
     )
 }
-
-
 
 
 export default LoginPage;

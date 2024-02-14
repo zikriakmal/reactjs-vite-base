@@ -21,10 +21,13 @@ const items: MenuProps['items'] = [
 
 const Home = () => {
     return (
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-8 container m-10">
             <p className="text-3xl">This is vite + react js + react router dom + tailwind + ant design</p>
             <div>
                 <Link to={"/contact"}>This is router to contact page</Link>
+            </div>
+            <div>
+                <Link to={"/login"}>Back to login page</Link>
             </div>
             <div>
                 <Button className="bg-slate-700" type="primary">This is ant design button example</Button>
