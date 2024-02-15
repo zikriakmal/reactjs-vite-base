@@ -1,7 +1,27 @@
 import { Link } from 'react-router-dom';
 import XLogo from '../../assets/xlogo.svg';
+import Button from '../../components/atoms/Button';
+import { useState } from 'react';
+import { Modal } from 'antd';
+import { CloseOutlined } from '@ant-design/icons';
+import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 
 const LoginPage = () => {
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const showModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleOk = () => {
+        setIsModalOpen(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
+
     return (
         <div className='flex flex-col  min-h-lvh'>
             <div className='flex flex-1 flex-row justify-between items-center'>
@@ -20,7 +40,7 @@ const LoginPage = () => {
                                 <p className='px-2' >or</p>
                                 <div className='h-[0.5px] w-auto flex-1 bg-gray-200' />
                             </div>
-                            <Button title={'Create Account'} type={"primary"} />
+                            <Button title={'Create Account'} type={"primary"} onClick={() => showModal()} />
                             <p className='text-xs mb-[20px]'>By signing up, you agree to the Terms of Service and Privacy Policy, including Cookie Use.</p>
                             <div className='mt-[40px] flex flex-col'>
                                 <p>Already have an account?</p>
@@ -53,19 +73,75 @@ const LoginPage = () => {
                 <a href="" className='text-xs hover:underline hover:text-gray-500'>Settings</a>
                 <a href="" className='text-xs hover:underline hover:text-gray-500'>© 2024 X Corp.</a>
             </div>
+            <Modal  title={<ModalHeader handleCancel={handleCancel} />} centered={true} open={isModalOpen} onOk={handleOk} footer={<></>} closeIcon={<></>} onCancel={handleCancel}>
+                <div className='flex flex-col flex-1 ustify-center py-2 px-10 '>
+                    <p className='font-bold text-2xl'>Create Accounts</p>
+                    <div className='py-4 '>
+                        <TextField id="outlined-basic" label="Name" variant="outlined" style={{ width: '100%' }} />
+                    </div>
+                    <div className='py-4 '>
+                        <TextField id="outlined-basic" label="Email" variant="outlined" style={{ width: '100%' }} />
+                    </div>
+
+                    <div>
+                        <p className='font-bold'>Date of Birth</p>
+                        <p className='text-xs'>This will not be shown publicly. Confirm your own age, even if this account is for a business, a pet, or something else.</p>
+                    </div>
+                    <div className="flex flex-row my-10 gap-2">
+                        <FormControl fullWidth className='flex-1'>
+                            <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                            <Select
+                                id="demo-simple-select"
+                                value={10}
+                                label="Age"
+                                onChange={() => { }}
+                            >
+                                <MenuItem value={10}>Ten</MenuItem>
+                                <MenuItem value={20}>Twenty</MenuItem>
+                            </Select>
+                        </FormControl>
+                        <FormControl>
+                            <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                            <Select
+                                id="demo-simple-select"
+                                value={10}
+                                label="Age"
+                                onChange={() => { }}
+                            >
+                                <MenuItem value={10}>Ten</MenuItem>
+                                <MenuItem value={20}>Twenty</MenuItem>
+                            </Select>
+                        </FormControl>
+                        <FormControl >
+                            <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                            <Select
+                                id="demo-simple-select"
+                                value={10}
+                                label="Age"
+                                onChange={() => { }}
+                            >
+                                <MenuItem value={10}>Ten</MenuItem>
+                                <MenuItem value={20}>Twenty</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </div>
+
+
+                </div>
+            </Modal>
         </div>
     )
-
 }
 
 
-const Button = (props: any) => {
+const ModalHeader = ({ handleCancel }: { handleCancel: any }) => {
     return (
-        <button type='button' className={'flex-1 border p-2 py-3 rounded-full hover:border-gray-500 hover:bg-slate-200 my-2'} style={props?.type === 'primary' ? { backgroundColor: 'rgb(29, 155, 240)', color: 'white' } : {}}>
-            <div className='text-center font-bold' style={props?.textColor === 'primary' ? { color: 'rgb(29, 155, 240)' } : {}}>
-                <p>{props?.title}</p>
+        <div className='flex flex-row'>
+            <button type={'button'} onClick={handleCancel}><CloseOutlined /></button>
+            <div className="flex flex-1 justify-center">
+                <img src={XLogo} className='w-5 h-5' />
             </div>
-        </button>
+        </div>
     )
 }
 
